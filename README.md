@@ -13,3 +13,6 @@ Click Izquierdo --> Disparar
 Espacio --> Saltar
 
 Q --> Habilidad (nuke)
+
+## ¿En qué motor esta desarrollado?
+Este videojuego esta completamente creado en el motor de unity
