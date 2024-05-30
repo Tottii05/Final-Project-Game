@@ -1,5 +1,5 @@
 # Polyverse Plague
-
+![Logo de GitHub](src/GameImage.PNG)
 ## ¿De qué trata?
 Polyverse Plague es un juego con temática de zombies estilo low poly, en el cual se tendrá que ir sobreviviendo lo máximo posible a las interminables hordas de zombies que se irán incrementando secuencialmente.
 
