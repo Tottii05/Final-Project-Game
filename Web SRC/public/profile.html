@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile - Polyverse Plague</title>
+        <link rel="stylesheet" href="assets/css/indexstyle.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav id="navbar">
+                <div>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li id="loginUrl"><a href="login">Login</a></li>
+                        <li id="profileUrl" class="hidden">
+                            <a href="profile">Profile</a>
+                        </li>
+                        <li><a href="scores">Scores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul id="welcomeList" class="hidden">
+                        <li><p id="welcomeText">Welcome, ...</p></li>
+                        <li><a id="logoutbtn">Log out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="profile-stats">
+                <div class="profile-header">
+                    <h1 class="username" id="welcomeMsg">Welcome, ...</h1>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number" id="gamesPlayedAmount"
+                            >0</span
+                        >
+                        <span class="stat-label">Games Played</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalRoundsAmount"
+                            >0</span
+                        >
+                        <span class="stat-label">Total Rounds</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalZombiesKilled"
+                            >0</span
+                        >
+                        <span class="stat-label">Zombies Killed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="totalScoreAmount">0</span>
+                        <span class="stat-label">Total Score</span>
+                    </div>
+                </div>
+                <section class="scores">
+                    <div class="scoreDiv">
+                        <div class="table-wrapper">
+                            <table id="scoreTable">
+                                <tr>
+                                    <th>Rounds</th>
+                                    <th>Zombies Killed</th>
+                                    <th>Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <div id="overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <img src="assets/img/loader.gif" alt="Loading..." />
+                <p>Connection lost. Reconnecting...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Pescalope INC.</p>
+            <p>31/5/2024</p>
+            <p>&#169; 2024 - 2024 Pescalone INC.</p>
+        </footer>
+        <script>
+            if (!localStorage.getItem("sessionToken")) {
+                window.location.replace("login");
+            }
+
+            document.addEventListener("DOMContentLoaded", async function () {
+                var gatheredStats = await fetchPlayerLeaderboard(1000);
+                var lblist = document.getElementById("scoreTable");
+                gatheredStats["response"].forEach((element) => {
+                    var newItem = document.createElement("tr");
+                    var td2 = document.createElement("td");
+                    var td3 = document.createElement("td");
+                    var td4 = document.createElement("td");
+                    var td5 = document.createElement("td");
+                    td2.innerText = element["roundssurvived"];
+                    td3.innerText = element["zombieskilled"];
+                    td4.innerText = element["score"];
+                    td5.innerText =
+                        element["finished"] == true
+                            ? "Completed"
+                            : "In progress";
+                    if (element["finished"] == false)
+                        newItem.classList.add("notfinished");
+                    newItem.appendChild(td2);
+                    newItem.appendChild(td3);
+                    newItem.appendChild(td4);
+                    newItem.appendChild(td5);
+                    lblist.appendChild(newItem);
+                });
+
+                gatheredStats = await fetchTotalStats();
+                console.log(gatheredStats);
+
+                document.getElementById("gamesPlayedAmount").innerText =
+                    gatheredStats.response.GamesPlayed == undefined
+                        ? 0
+                        : gatheredStats.response.GamesPlayed;
+                document.getElementById("totalRoundsAmount").innerText =
+                    gatheredStats.response.TotalRounds == undefined
+                        ? 0
+                        : gatheredStats.response.TotalRounds;
+                document.getElementById("totalZombiesKilled").innerText =
+                    gatheredStats.response.ZombiesKilled == undefined
+                        ? 0
+                        : gatheredStats.response.ZombiesKilled;
+                document.getElementById("totalScoreAmount").innerText =
+                    gatheredStats.response.TotalScore == undefined
+                        ? 0
+                        : gatheredStats.response.TotalScore;
+
+                document.getElementById("welcomeMsg").innerText =
+                    "Welcome, " + userName + "!";
+            });
+        </script>
+        <script src="assets/js/connection.js"></script>
+    </body>
+</html>
