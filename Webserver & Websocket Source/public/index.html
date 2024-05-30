@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home - Polyverse Plague</title>
+        <link rel="stylesheet" href="assets/css/indexstyle.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav id="navbar">
+                <div>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li id="loginUrl"><a href="login">Login</a></li>
+                        <li id="profileUrl" class="hidden">
+                            <a href="profile">Profile</a>
+                        </li>
+                        <li><a href="scores">Scores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul id="welcomeList" class="hidden">
+                        <li><p id="welcomeText">Welcome, ...</p></li>
+                        <li><a id="logoutbtn">Log out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="game-info">
+                <h1 class="game-title">POLYVERSE PLAGUE</h1>
+                <div class="game-image">
+                    <img src="assets/img/GameImage.PNG" alt="Game Image" />
+                </div>
+                <h1>Developers</h1>
+            </section>
+
+            <section class="developers">
+                <div class="developer">
+                    <img src="assets/img/tomas.gif" alt="ElAlfred" />
+                    <p><a href="https://github.com/ElAlfred080">ElAlfred</a></p>
+                </div>
+                <div class="developer">
+                    <img src="assets/img/skibidi.gif" alt="Mirko" />
+                    <p>
+                        <a href="https://github.com/miroslavmagerov">Mirko</a>
+                    </p>
+                </div>
+                <div class="developer">
+                    <img src="assets/img/ermeta.jpg" alt="metaa" />
+                    <p>
+                        <a href="https://github.com/metaacalled">Metacalled</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <div id="overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <img src="assets/img/loader.gif" alt="Loading..." />
+                <p>Connection lost. Reconnecting...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Pescalope INC.</p>
+            <p>31/5/2024</p>
+            <p>&#169; 2024 - 2024 Pescalone INC.</p>
+        </footer>
+        <script src="assets/js/connection.js"></script>
+    </body>
+</html>

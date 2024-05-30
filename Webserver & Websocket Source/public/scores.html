@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Scores - Polyverse Plague</title>
+        <link rel="stylesheet" href="assets/css/indexstyle.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav id="navbar">
+                <div>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li id="loginUrl"><a href="login">Login</a></li>
+                        <li id="profileUrl" class="hidden">
+                            <a href="profile">Profile</a>
+                        </li>
+                        <li><a href="scores">Scores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul id="welcomeList" class="hidden">
+                        <li><p id="welcomeText">Welcome, ...</p></li>
+                        <li><a id="logoutbtn">Log out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="scores">
+                <h1>TOP 10</h1>
+                <div class="scoreDiv">
+                    <div class="table-wrapper">
+                        <table id="scoreTable">
+                            <tr>
+                                <th>Player</th>
+                                <th>Rounds</th>
+                                <th>Zombies Killed</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div id="overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <img src="assets/img/loader.gif" alt="Loading..." />
+                <p>Connection lost. Reconnecting...</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Pescalope INC.</p>
+            <p>31/5/2024</p>
+            <p>&#169; 2024 - 2024 Pescalone INC.</p>
+        </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", async function () {
+                var gatheredStats = await fetchLeaderboard(10);
+                var lblist = document.getElementById("scoreTable");
+                gatheredStats["response"].forEach((element) => {
+                    var newItem = document.createElement("tr");
+                    var td1 = document.createElement("td");
+                    var td2 = document.createElement("td");
+                    var td3 = document.createElement("td");
+                    var td4 = document.createElement("td");
+                    var td5 = document.createElement("td");
+                    td1.innerText = element["username"];
+                    td2.innerText = element["roundssurvived"];
+                    td3.innerText = element["zombieskilled"];
+                    td4.innerText = element["score"];
+                    td5.innerText =
+                        element["finished"] == true
+                            ? "Completed"
+                            : "In progress";
+                    if (element["finished"] == false)
+                        newItem.classList.add("notfinished");
+                    newItem.appendChild(td1);
+                    newItem.appendChild(td2);
+                    newItem.appendChild(td3);
+                    newItem.appendChild(td4);
+                    newItem.appendChild(td5);
+                    lblist.appendChild(newItem);
+                });
+            });
+        </script>
+        <script src="assets/js/connection.js"></script>
+    </body>
+</html>
